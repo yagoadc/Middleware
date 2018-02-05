@@ -97,7 +97,7 @@
 
                     @if (Auth::check())
                         <a href="{{route('produtos')}}">Produtos</a>
-                        @if(true){{--auth()->user()->isAdmin--}}
+                        @if(auth()->user()->isAdmin){{--auth()->user()->isAdmin--}}
                             <a href="{{route('estudantes.index')}}">Estudantes</a>
                         @endif
                     @endif
