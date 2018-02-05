@@ -72,8 +72,21 @@
                         <a href="{{ url('/login') }}">Login</a>
                         <a href="{{ url('/register') }}">Register</a>
                     </div>
+                @else
+                    <div class="top-right links">
+                        <a href="{{ url('/logout') }}"
+                           onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+
+                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </div>
                 @endif
             @endif
+
 
             <div class="content">
                 <div class="title m-b-md">
@@ -81,8 +94,13 @@
                 </div>
 
                 <div class="links">
-                    <a href="{{route('produtos')}}">Produtos</a>
-                    <a href="{{route('estudantes.index')}}">Estudantes</a>
+
+                    @if (Auth::check())
+                        <a href="{{route('produtos')}}">Produtos</a>
+                        @if(true){{--auth()->user()->isAdmin--}}
+                            <a href="{{route('estudantes.index')}}">Estudantes</a>
+                        @endif
+                    @endif
                 </div>
             </div>
         </div>
